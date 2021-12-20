@@ -1,0 +1,12 @@
+html {
+    --bg-cnt: #221d1d;
+    --bor-cnt: 1px solid grey;
+    
+    --bg-elt: #181515;
+
+    --bg-btn1: #955b108a;
+    --bg-btn2: rgb(167, 108, 46);
+    --bor-color-btn: #8b6200;
+
+    --shadow: 1px 1px 3px #8b6200;
+}
