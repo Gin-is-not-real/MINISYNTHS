@@ -104,7 +104,9 @@ class PianoBox {
         let noteElt = document.createElement('div');
         noteElt.className = 'note';
         noteElt.id = note.name;
-        noteElt.textContent = note.key;
+        let p = document.createElement('p');
+        p.textContent = note.key;
+        noteElt.appendChild(p);
     
         if(noteElt.id.substr(-1) === "d") {
             noteElt.classList.add('diese');

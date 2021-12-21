@@ -90,8 +90,13 @@ input[type=range]::-moz-range-progress {
     /* border-top: none; */
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    cursor: pointer;
+
     grid-row: 1/3;   
-    
     color: rgba(0, 0, 0, 0.671);
     text-align: center;
 }
@@ -107,7 +112,12 @@ input[type=range]::-moz-range-progress {
     grid-row: 1;
     z-index: 1;
 }
-
+.note p {
+    margin-bottom: 2px;
+}
+.note:not(.diese) p {
+    margin-bottom: 8px;
+}
 #do {
     grid-column: 1/4;
 }
@@ -176,6 +186,7 @@ input[type=range]::-moz-range-progress {
     border-radius: 100%;
     background-color: var(--bg-btn1);
     border: 1px solid var(--bor-color-btn);
+    cursor: pointer;
 }
 #octave-shifter button:hover {
     box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
