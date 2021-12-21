@@ -1,24 +1,48 @@
 ////////////////////////////////////////////////////////////////
 //
 class PianoBox {
-    oscillator;
+    osc;
 
     notes = [];
     activeNote;
     octave;
 
     interface;
+    noteDisplayer;
 
     constructor() {
+        this.osc = this.createOscillator();
         this.notes = NOTES;
         this.octave = 4;
-        this.init();
-    }
-
-    init() {
-        this.oscillator = audioCtx.createOscillator();
         this.interface = this.createInterface();
         this.attachKeysEvents();
+    }
+
+    createOscillator() {
+        let osc = audioCtx.createOscillator();
+        let gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+
+        osc.gain = gain;
+
+        osc.setGain = function(value) {
+            this.gain.gain.value = value;
+        }
+        osc.getGain = function() {
+            return this.gain.gain.value;
+        }
+        osc.setFrequency = function(value) {
+            this.frequency.value = value;
+        }
+        osc.getFrequency = function() {
+            return this.frequency.value;
+        }
+
+        osc.setGain(0);
+        osc.start();
+
+        return osc;
     }
 
     createInterface() {
@@ -30,6 +54,10 @@ class PianoBox {
 
         let freqMonito = Component.createValueMonitor("Note");
         freqMonito.id = "freq-displayer";
+        // TODO: changer l'id et le  nom de varible pour noteDisplayer
+        this.noteDisplayer = freqMonito.childNodes[1];
+        console.log(this.noteDisplayer);
+
         content.appendChild(freqMonito);
 
         content.appendChild(Component.createOctaveShifter(this));
@@ -64,8 +92,9 @@ class PianoBox {
             noteElt.classList.add('diese');
         }
     
+        let self = this;
         noteElt.addEventListener("click", function() {
-            PianoBox.playNote(note);
+            self.playNote(note);
         });
     
         return noteElt;
@@ -79,14 +108,15 @@ class PianoBox {
         });
         console.log(keys);
     
+        let self = this;
         document.addEventListener('keydown', function(e) {
             if(keys.includes(e.key)) {
                 let index = keys.indexOf(e.key);
                 let played = notesTab[index];
 
-                PianoBox.playNote(played);
-                console.log('Key ', e.key, ' play ', played);
+                self.playNote(played);
 
+                console.log('Key ', e.key, ' play ', played);
                 played.element.classList.add('active');
             }
         })
@@ -94,41 +124,44 @@ class PianoBox {
             if(keys.includes(e.key)) {
                 let index = keys.indexOf(e.key);
                 let played = notesTab[index];
+
+                self.stopNote();
+
                 played.element.classList.remove('active');
             }
         })
     }
 
-    upOctave(self) {
-        self.octave ++;
+    upOctave() {
+        this.octave ++;
 
-        let notes = self.notes;
+        let notes = this.notes;
         notes.forEach(note => {
             note.freq *= 2;
         });
-        self.notes = notes;
+        this.notes = notes;
     }
-    downOctave(self) {
-        self.octave --;
+    downOctave() {
+        this.octave --;
 
-        let notes = self.notes;
+        let notes = this.notes;
         notes.forEach(note => {
             note.freq /= 2;
         });
-        self.notes = notes;
+        this.notes = notes;
     }
 
-    static playNote(note) {
-        // this.displayNote(document.querySelector('#pianoBox #freq-displayer .displayer'), note);
+    playNote(note) {
+        this.osc.setFrequency(note.freq);
+        this.osc.setGain(1);
 
-        document.querySelector('#pianoBox #freq-displayer .displayer').textContent = note.fr;
-
+        console.log(this.noteDisplayer);
+        this.noteDisplayer.textContent = note.fr;
     }
+    stopNote() {
+        this.osc.setGain(0);
 
-    // static displayNote(elt, note) {
-    //     elt.textContent = note.fr + ' '+ note.freq;
-    //     elt.textContent = note.fr;
-
-    //     console.log(note.element);
-    // }
+        this.noteDisplayer.textContent = "";
+    }
+    
 }
