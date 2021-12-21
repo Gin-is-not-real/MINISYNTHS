@@ -39,6 +39,8 @@ class PianoBox {
         this.notes.forEach(note => {
             let noteElt = this.createNoteElement(note);
             keyboard.appendChild(noteElt);
+
+            note.element = noteElt;
         });
         keyboardCnt.appendChild(keyboard);
 
@@ -73,6 +75,7 @@ class PianoBox {
             if(keys.includes(e.key)) {
                 let index = keys.indexOf(e.key);
                 let played = notesTab[index];
+
                 PianoBox.playNote(played);
                 console.log('Key ', e.key, ' play ', played);
             }
@@ -105,5 +108,9 @@ class PianoBox {
 
     static displayNote(elt, note) {
         elt.textContent = note.fr + ' '+ note.freq;
+        elt.textContent = note.fr;
+
+        console.log(note.element);
+        note.element.classList.add('active');
     }
 }

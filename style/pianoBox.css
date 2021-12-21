@@ -39,12 +39,6 @@
     color: var(--bg-btn2);
 }
 /* keyboard */
-keyboard-1::part(keyboard) {
-    width: 100%;
-    min-width: 120px;
-    max-width: 160px;
-    height: 100%;
-}
 #keyboard-cnt {
     width: 100%;
     min-width: 120px;
@@ -70,12 +64,16 @@ keyboard-1::part(keyboard) {
     color: rgba(0, 0, 0, 0.671);
     text-align: center;
 }
+.note:hover {
+    box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
+}
 .diese {
     background-color: var(--bg-btn2);
     border: 1px solid var(--bor-color-btn);
     grid-row: 1;
     z-index: 1;
 }
+
 #do {
     grid-column: 1/4;
 }
@@ -131,6 +129,9 @@ keyboard-1::part(keyboard) {
     border-radius: 100%;
     background-color: var(--bg-btn1);
     border: 1px solid var(--bor-color-btn);
+}
+#octave-shifter button:hover {
+    box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
 }
 #octave-shifter div {
     width: 20px;
