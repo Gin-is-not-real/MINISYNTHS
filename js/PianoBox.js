@@ -1,15 +1,22 @@
+////////////////////////////////////////////////////////////////
+//
 class PianoBox {
-    interface;
+    oscillator;
+
     notes = [];
+    activeNote;
     octave;
 
-    constructor(notes) {
-        this.notes = notes;
+    interface;
+
+    constructor() {
+        this.notes = NOTES;
         this.octave = 4;
         this.init();
     }
 
     init() {
+        this.oscillator = audioCtx.createOscillator();
         this.interface = this.createInterface();
         this.attachKeysEvents();
     }
@@ -17,13 +24,13 @@ class PianoBox {
     createInterface() {
         let content = document.createElement("div");
         content.id = "pianoBox";
-        
-        let freqMonito = Component.createValueMonitor("Note");
-        freqMonito.id = "freq-displayer";
-        content.appendChild(freqMonito);
 
         let keyboard = this.createKeyboardElement();
         content.appendChild(keyboard);
+
+        let freqMonito = Component.createValueMonitor("Note");
+        freqMonito.id = "freq-displayer";
+        content.appendChild(freqMonito);
 
         content.appendChild(Component.createOctaveShifter(this));
 
@@ -50,7 +57,7 @@ class PianoBox {
     createNoteElement(note) {
         let noteElt = document.createElement('div');
         noteElt.className = 'note';
-        noteElt.id = note.id;
+        noteElt.id = note.name;
         noteElt.textContent = note.key;
     
         if(noteElt.id.substr(-1) === "d") {
