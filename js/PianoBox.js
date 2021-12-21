@@ -93,8 +93,11 @@ class PianoBox {
         }
     
         let self = this;
-        noteElt.addEventListener("click", function() {
+        noteElt.addEventListener("mousedown", function() {
             self.playNote(note);
+        });
+        noteElt.addEventListener("mouseup", function() {
+            self.stopNote();
         });
     
         return noteElt;
@@ -155,7 +158,6 @@ class PianoBox {
         this.osc.setFrequency(note.freq);
         this.osc.setGain(1);
 
-        console.log(this.noteDisplayer);
         this.noteDisplayer.textContent = note.fr;
     }
     stopNote() {
