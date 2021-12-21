@@ -6,6 +6,7 @@ class PianoBox {
     notes = [];
     activeNote;
     octave;
+    padIsHold;
 
     interface;
 
@@ -13,6 +14,8 @@ class PianoBox {
         this.osc = this.createOscillator();
         this.notes = NOTES;
         this.octave = 4;
+        this.padIsHold = false;
+
         this.interface = this.createInterface();
 
         this.attachKeysEvents();
@@ -101,8 +104,20 @@ class PianoBox {
         let self = this;
         noteElt.addEventListener("mousedown", function() {
             self.playNote(note);
+            self.padIsHold = true;
+
+            console.log(self.padIsHold);
         });
         noteElt.addEventListener("mouseup", function() {
+            self.stopNote();
+            self.padIsHold = false;
+        });
+        noteElt.addEventListener("mouseenter", function() {
+            if(self.padIsHold) {
+                self.playNote(note);
+            }
+        });
+        noteElt.addEventListener("mouseleave", function() {
             self.stopNote();
         });
     
@@ -147,8 +162,8 @@ class PianoBox {
 
         let screen = document.createElement('div');
         let p = document.createElement('p');
+        p.textContent = this.octave;
         screen.appendChild(p);
-        component.screen = screen;
 
         let btnUp = document.createElement('button');
         btnUp.className = "shift-up";
@@ -160,15 +175,15 @@ class PianoBox {
 
         let self = this;
         component.up.addEventListener('click', function() {
-            if(self.octave < 11) {
+            if(self.octave < 9) {
                 self.upOctave(self);
-                component.screen.textContent = self.octave;
+                p.textContent = self.octave;
             }
         });
         component.down.addEventListener('click', function() {
             if(self.octave > 0) {
                 self.downOctave(self);
-                component.screen.textContent = self.octave;
+                p.textContent = self.octave;
             }
         });
 
@@ -178,6 +193,14 @@ class PianoBox {
         component.appendChild(btnDown);
 
         return component;
+    }
+
+    playNote(note) {
+        this.setOscFrequency(note.freq);
+        this.setOscGain(1);
+    }
+    stopNote() {
+        this.setOscGain(0);
     }
 
     upOctave() {
@@ -211,13 +234,4 @@ class PianoBox {
     getOscGain= function() {
         return this.osc.gain.gain.value;
     }
-
-    playNote(note) {
-        this.setOscFrequency(note.freq);
-        this.setOscGain(1);
-    }
-    stopNote() {
-        this.setOscGain(0);
-    }
-    
 }
