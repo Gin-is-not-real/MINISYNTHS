@@ -15,31 +15,18 @@ class PianoBox {
         this.notes = NOTES;
         this.octave = 4;
         this.interface = this.createInterface();
+
         this.attachKeysEvents();
     }
 
     createOscillator() {
         let osc = audioCtx.createOscillator();
         let gain = audioCtx.createGain();
-        osc.connect(gain);
+        gain.gain.value = 0;
         gain.connect(audioCtx.destination);
 
         osc.gain = gain;
-
-        osc.setGain = function(value) {
-            this.gain.gain.value = value;
-        }
-        osc.getGain = function() {
-            return this.gain.gain.value;
-        }
-        osc.setFrequency = function(value) {
-            this.frequency.value = value;
-        }
-        osc.getFrequency = function() {
-            return this.frequency.value;
-        }
-
-        osc.setGain(0);
+        osc.connect(gain);
         osc.start();
 
         return osc;
@@ -154,15 +141,26 @@ class PianoBox {
         this.notes = notes;
     }
 
-    playNote(note) {
-        this.osc.setFrequency(note.freq);
-        this.osc.setGain(1);
+    setOscFrequency(value) {
+        this.osc.frequency.value = value;
+    }
+    getOscFrequency() {
+        return this.osc.frequency.value;
+    }
+    setOscGain(value) {
+        this.osc.gain.gain.value = value;
+    }
+    getOscGain= function() {
+        return this.osc.gain.gain.value;
+    }
 
+    playNote(note) {
+        this.setOscFrequency(note.freq);
+        this.setOscGain(1);
         this.noteDisplayer.textContent = note.fr;
     }
     stopNote() {
-        this.osc.setGain(0);
-
+        this.setOscGain(0);
         this.noteDisplayer.textContent = "";
     }
     
