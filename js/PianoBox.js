@@ -2,6 +2,8 @@
 //
 class PianoBox {
     osc;
+    oscGain;
+    masterGain;
 
     notes = [];
     activeNote;
@@ -11,7 +13,7 @@ class PianoBox {
     interface;
 
     constructor() {
-        this.osc = this.createOscillator();
+        this.osc = this.createSoundNodes();
         this.notes = NOTES;
         this.octave = 4;
         this.padIsHold = false;
@@ -21,13 +23,19 @@ class PianoBox {
         this.attachKeysEvents();
     }
 
-    createOscillator() {
-        let osc = audioCtx.createOscillator();
+    createSoundNodes() {
+        let master = audioCtx.createGain();
+        master.gain.value = 1;
+        master.connect(audioCtx.destination);
+        this.masterGain = master;
+
         let gain = audioCtx.createGain();
         gain.gain.value = 0;
-        gain.connect(audioCtx.destination);
+        gain.connect(master);
+        this.oscGain = gain;
 
-        osc.gain = gain;
+        let osc = audioCtx.createOscillator();
+        // osc.gain = gain;
         osc.connect(gain);
         osc.start();
 
@@ -60,6 +68,7 @@ class PianoBox {
         gainControl.type = "range";
         gainControl.max = '3';
         gainControl.step = '0.2';
+        gainControl.value = this.getMasterGain();
 
         gainCnt.appendChild(gainDisplayer);
         gainCnt.appendChild(gainControl);
@@ -68,7 +77,7 @@ class PianoBox {
 
         let self = this;
         gainControl.addEventListener('input', function() {
-            self.setOscGain(this.value);
+            self.setMasterGain(this.value);
         });
 
         return container
@@ -105,8 +114,6 @@ class PianoBox {
         noteElt.addEventListener("mousedown", function() {
             self.playNote(note);
             self.padIsHold = true;
-
-            console.log(self.padIsHold);
         });
         noteElt.addEventListener("mouseup", function() {
             self.stopNote();
@@ -205,21 +212,15 @@ class PianoBox {
 
     upOctave() {
         this.octave ++;
-
-        let notes = this.notes;
-        notes.forEach(note => {
+        this.notes.forEach(note => {
             note.freq *= 2;
         });
-        this.notes = notes;
     }
     downOctave() {
         this.octave --;
-
-        let notes = this.notes;
-        notes.forEach(note => {
+        this.notes.forEach(note => {
             note.freq /= 2;
         });
-        this.notes = notes;
     }
 
     setOscFrequency(value) {
@@ -229,9 +230,15 @@ class PianoBox {
         return this.osc.frequency.value;
     }
     setOscGain(value) {
-        this.osc.gain.gain.value = value;
+        this.oscGain.gain.value = value;
     }
     getOscGain= function() {
-        return this.osc.gain.gain.value;
+        return this.oscGain.gain.value;
+    }
+    setMasterGain(value) {
+        this.masterGain.gain.value = value;
+    }
+    getMasterGain= function() {
+        return this.masterGain.gain.value;
     }
 }
