@@ -67,6 +67,9 @@
 .note:hover {
     box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
 }
+.active { 
+    box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
+}
 .diese {
     background-color: var(--bg-btn2);
     border: 1px solid var(--bor-color-btn);

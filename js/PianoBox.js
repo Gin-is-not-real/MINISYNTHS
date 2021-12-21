@@ -18,7 +18,7 @@ class PianoBox {
         let content = document.createElement("div");
         content.id = "pianoBox";
         
-        let freqMonito = Component.createValueMonitor("Freq");
+        let freqMonito = Component.createValueMonitor("Note");
         freqMonito.id = "freq-displayer";
         content.appendChild(freqMonito);
 
@@ -70,6 +70,7 @@ class PianoBox {
         notesTab.forEach(note => {
             keys.push(note.key);
         });
+        console.log(keys);
     
         document.addEventListener('keydown', function(e) {
             if(keys.includes(e.key)) {
@@ -78,6 +79,15 @@ class PianoBox {
 
                 PianoBox.playNote(played);
                 console.log('Key ', e.key, ' play ', played);
+
+                played.element.classList.add('active');
+            }
+        })
+        document.addEventListener('keyup', function(e) {
+            if(keys.includes(e.key)) {
+                let index = keys.indexOf(e.key);
+                let played = notesTab[index];
+                played.element.classList.remove('active');
             }
         })
     }
@@ -102,15 +112,16 @@ class PianoBox {
     }
 
     static playNote(note) {
-        console.log(note);
-        this.displayNote(document.querySelector('#pianoBox #freq-displayer .displayer'), note);
+        // this.displayNote(document.querySelector('#pianoBox #freq-displayer .displayer'), note);
+
+        document.querySelector('#pianoBox #freq-displayer .displayer').textContent = note.fr;
+
     }
 
-    static displayNote(elt, note) {
-        elt.textContent = note.fr + ' '+ note.freq;
-        elt.textContent = note.fr;
+    // static displayNote(elt, note) {
+    //     elt.textContent = note.fr + ' '+ note.freq;
+    //     elt.textContent = note.fr;
 
-        console.log(note.element);
-        note.element.classList.add('active');
-    }
+    //     console.log(note.element);
+    // }
 }
