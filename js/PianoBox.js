@@ -8,8 +8,6 @@ class PianoBox {
     octave;
 
     interface;
-    noteDisplayer;
-    oscGainDisplayer;
 
     constructor() {
         this.osc = this.createOscillator();
@@ -37,21 +35,9 @@ class PianoBox {
         let content = document.createElement("div");
         content.id = "pianoBox";
 
-        let oscControls = this.createOscControls();
-        content.appendChild(oscControls);
-
-        let keyboard = this.createKeyboardElement();
-        content.appendChild(keyboard);
-
-        let freqMonito = Component.createValueMonitor("Note");
-        freqMonito.id = "freq-displayer";
-        // TODO: changer l'id et le  nom de varible pour noteDisplayer
-        this.noteDisplayer = freqMonito.childNodes[1];
-        console.log(this.noteDisplayer);
-
-        // content.appendChild(freqMonito);
-
-        content.appendChild(Component.createOctaveShifter(this));
+        content.appendChild(this.createOscControls());
+        content.appendChild(this.createKeyboardElement());
+        content.appendChild(this.createOctaveShifter());
 
         return content;
     }
@@ -65,43 +51,22 @@ class PianoBox {
         gainCnt.id = "osc-gain-cnt";
 
         let gainDisplayer = document.createElement('p');
-        // gainDisplayer.className = 'displayer';
         gainDisplayer.textContent = 'Vol';
 
         let gainControl = document.createElement("input");
         gainControl.type = "range";
         gainControl.max = '3';
         gainControl.step = '0.2';
-        // gainControl.id = "osc-gain-ctrl";
 
         gainCnt.appendChild(gainDisplayer);
         gainCnt.appendChild(gainControl);
 
-        //freq
-        let freqCnt = document.createElement('div');
-        freqCnt.id = "osc-freq-cnt";
-
-        let freqDisplayer = document.createElement('p');
-        // freqDisplayer.className = 'displayer';
-        freqDisplayer.textContent = 'Freq';
-
-        let freqControl = document.createElement('input');
-        freqControl.type = "range";
-        // freqControl.id = "osc-freq-ctrl";
-        freqCnt.appendChild(freqDisplayer);
-        freqCnt.appendChild(freqControl);
-
         container.appendChild(gainCnt);
-        container.appendChild(freqCnt);
 
         let self = this;
         gainControl.addEventListener('input', function() {
             console.log(this.value);
             self.setOscGain(this.value);
-        });
-        freqControl.addEventListener('input', function() {
-            console.log(this.value);
-            self.setOscFrequency(this.value);
         });
 
         return container
@@ -151,30 +116,65 @@ class PianoBox {
         notesTab.forEach(note => {
             keys.push(note.key);
         });
-        console.log(keys);
     
         let self = this;
         document.addEventListener('keydown', function(e) {
             if(keys.includes(e.key)) {
                 let index = keys.indexOf(e.key);
                 let played = notesTab[index];
+                played.element.classList.add('active');
 
                 self.playNote(played);
-
-                console.log('Key ', e.key, ' play ', played);
-                played.element.classList.add('active');
             }
         })
         document.addEventListener('keyup', function(e) {
             if(keys.includes(e.key)) {
                 let index = keys.indexOf(e.key);
                 let played = notesTab[index];
+                played.element.classList.remove('active');
 
                 self.stopNote();
-
-                played.element.classList.remove('active');
             }
         })
+    }
+
+    createOctaveShifter() {
+        let component = document.createElement('div');
+        component.className = "comp-cnt";
+        component.id = "octave-shifter";
+
+        let screen = document.createElement('div');
+        let p = document.createElement('p');
+        screen.appendChild(p);
+        component.screen = screen;
+
+        let btnUp = document.createElement('button');
+        btnUp.className = "shift-up";
+        component.up = btnUp;
+
+        let btnDown = document.createElement('button');
+        btnDown.className = "shift-down";
+        component.down = btnDown;
+
+        let self = this;
+        component.up.addEventListener('click', function() {
+            if(self.octave < 11) {
+                self.upOctave(self);
+                component.screen.textContent = self.octave;
+            }
+        });
+        component.down.addEventListener('click', function() {
+            if(self.octave > 0) {
+                self.downOctave(self);
+                component.screen.textContent = self.octave;
+            }
+        });
+
+        component.appendChild(btnUp);
+        component.appendChild(screen);
+        component.appendChild(btnDown);
+
+        return component;
     }
 
     upOctave() {
@@ -204,7 +204,6 @@ class PianoBox {
     }
     setOscGain(value) {
         this.osc.gain.gain.value = value;
-        // this.oscGainDisplayer.textContent = this.getOscGain();
     }
     getOscGain= function() {
         return this.osc.gain.gain.value;
@@ -213,11 +212,9 @@ class PianoBox {
     playNote(note) {
         this.setOscFrequency(note.freq);
         this.setOscGain(1);
-        this.noteDisplayer.textContent = note.fr;
     }
     stopNote() {
         this.setOscGain(0);
-        this.noteDisplayer.textContent = "";
     }
     
 }
