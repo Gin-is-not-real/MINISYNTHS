@@ -9,6 +9,7 @@ class PianoBox {
 
     interface;
     noteDisplayer;
+    oscGainDisplayer;
 
     constructor() {
         this.osc = this.createOscillator();
@@ -36,6 +37,9 @@ class PianoBox {
         let content = document.createElement("div");
         content.id = "pianoBox";
 
+        let oscControls = this.createOscControls();
+        content.appendChild(oscControls);
+
         let keyboard = this.createKeyboardElement();
         content.appendChild(keyboard);
 
@@ -45,11 +49,62 @@ class PianoBox {
         this.noteDisplayer = freqMonito.childNodes[1];
         console.log(this.noteDisplayer);
 
-        content.appendChild(freqMonito);
+        // content.appendChild(freqMonito);
 
         content.appendChild(Component.createOctaveShifter(this));
 
         return content;
+    }
+
+    createOscControls() {
+        let container = document.createElement('div');
+        container.id = "osc-cnt";
+
+        //gain
+        let gainCnt = document.createElement('div');
+        gainCnt.id = "osc-gain-cnt";
+
+        let gainDisplayer = document.createElement('p');
+        // gainDisplayer.className = 'displayer';
+        gainDisplayer.textContent = 'Vol';
+
+        let gainControl = document.createElement("input");
+        gainControl.type = "range";
+        gainControl.max = '3';
+        gainControl.step = '0.2';
+        // gainControl.id = "osc-gain-ctrl";
+
+        gainCnt.appendChild(gainDisplayer);
+        gainCnt.appendChild(gainControl);
+
+        //freq
+        let freqCnt = document.createElement('div');
+        freqCnt.id = "osc-freq-cnt";
+
+        let freqDisplayer = document.createElement('p');
+        // freqDisplayer.className = 'displayer';
+        freqDisplayer.textContent = 'Freq';
+
+        let freqControl = document.createElement('input');
+        freqControl.type = "range";
+        // freqControl.id = "osc-freq-ctrl";
+        freqCnt.appendChild(freqDisplayer);
+        freqCnt.appendChild(freqControl);
+
+        container.appendChild(gainCnt);
+        container.appendChild(freqCnt);
+
+        let self = this;
+        gainControl.addEventListener('input', function() {
+            console.log(this.value);
+            self.setOscGain(this.value);
+        });
+        freqControl.addEventListener('input', function() {
+            console.log(this.value);
+            self.setOscFrequency(this.value);
+        });
+
+        return container
     }
 
     createKeyboardElement() {
@@ -149,6 +204,7 @@ class PianoBox {
     }
     setOscGain(value) {
         this.osc.gain.gain.value = value;
+        // this.oscGainDisplayer.textContent = this.getOscGain();
     }
     getOscGain= function() {
         return this.osc.gain.gain.value;
