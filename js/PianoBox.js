@@ -65,7 +65,6 @@ class PianoBox {
 
         let self = this;
         gainControl.addEventListener('input', function() {
-            console.log(this.value);
             self.setOscGain(this.value);
         });
 
@@ -143,6 +142,9 @@ class PianoBox {
         component.className = "comp-cnt";
         component.id = "octave-shifter";
 
+        let label = document.createElement('p');
+        label.textContent = 'Oct';
+
         let screen = document.createElement('div');
         let p = document.createElement('p');
         screen.appendChild(p);
@@ -170,6 +172,7 @@ class PianoBox {
             }
         });
 
+        component.appendChild(label);
         component.appendChild(btnUp);
         component.appendChild(screen);
         component.appendChild(btnDown);

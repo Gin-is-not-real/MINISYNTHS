@@ -3,8 +3,9 @@
     min-width: max-content;
     height: 60px;
     display: flex;
+    justify-content: space-between;
     gap: 4%;
-    padding: 2% 2% 2% 0%;
+    padding: 3% 1.5% 3% 1%;
 
     /* border: var(--bor-cnt); */
     box-shadow: var(--shadow);
@@ -146,9 +147,10 @@ input[type=range]::-moz-range-progress {
 #do2 {
     grid-column: 22/25;
 }
+
 .displayer {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,6 +158,40 @@ input[type=range]::-moz-range-progress {
     border: 1px solid var(--bg-btn1);
     border-radius: 10%;
     color: var(--bg-btn2);
+}
+
+/* octave shifter*/
+#octave-shifter {
+    min-width: 30px;
+    height: 90%;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#octave-shifter button {
+    width: 6px;
+    height: 6px;
+    border-radius: 100%;
+    background-color: var(--bg-btn1);
+    border: 1px solid var(--bor-color-btn);
+}
+#octave-shifter button:hover {
+    box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
+}
+#octave-shifter div {
+    width: 15px;
+    height: 15px;
+    background-color: var(--bg-elt);
+    border: 1px solid var(--bg-btn1);
+    border-radius: 10%;
+
+    color: var(--bg-btn2);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 /*  */
@@ -173,8 +209,8 @@ input[type=range]::-moz-range-progress {
     color: var(--bg-btn2);
 }
 #freq-displayer .displayer {
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -183,38 +219,3 @@ input[type=range]::-moz-range-progress {
     border-radius: 10%;
     color: var(--bg-btn2);
 }
-
-/* octave shifter*/
-#octave-shifter {
-    height: 90%;
-    align-self: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-}
-#octave-shifter button {
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
-    background-color: var(--bg-btn1);
-    border: 1px solid var(--bor-color-btn);
-}
-#octave-shifter button:hover {
-    box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
-}
-#octave-shifter div {
-    width: 20px;
-    height: 20px;
-    /* border-radius: 100%; */
-    background-color: var(--bg-elt);
-    border: 1px solid var(--bg-btn1);
-    border-radius: 10%;
-
-    color: var(--bg-btn2);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
