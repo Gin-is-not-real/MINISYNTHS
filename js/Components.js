@@ -10,7 +10,7 @@ class Component {
         cnt.appendChild(labelCnt);
 
         let screenCnt = document.createElement("div");
-        screenCnt.className = "screen";
+        screenCnt.className = "displayer";
         let screenP = document.createElement("p");
         screenP.textContent = "";
         screenCnt.appendChild(screenP);

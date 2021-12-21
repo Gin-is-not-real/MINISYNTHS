@@ -1,22 +1,30 @@
 class PianoBox {
+    interface;
     notes = [];
     octave;
 
     constructor(notes) {
         this.notes = notes;
         this.octave = 4;
+        this.init();
     }
 
-    createElement() {
+    init() {
+        this.interface = this.createInterface();
+        this.attachKeysEvents();
+    }
+
+    createInterface() {
         let content = document.createElement("div");
         content.id = "pianoBox";
         
         let freqMonito = Component.createValueMonitor("Freq");
-        freqMonito.id = "freq-monitor";
+        freqMonito.id = "freq-displayer";
         content.appendChild(freqMonito);
 
         let keyboard = this.createKeyboardElement();
         content.appendChild(keyboard);
+
         content.appendChild(Component.createOctaveShifter(this));
 
         return content;
@@ -54,6 +62,23 @@ class PianoBox {
         return noteElt;
     }
 
+    attachKeysEvents() {
+        let notesTab = this.notes;
+        let keys = [];
+        notesTab.forEach(note => {
+            keys.push(note.key);
+        });
+    
+        document.addEventListener('keydown', function(e) {
+            if(keys.includes(e.key)) {
+                let index = keys.indexOf(e.key);
+                let played = notesTab[index];
+                PianoBox.playNote(played);
+                console.log('Key ', e.key, ' play ', played);
+            }
+        })
+    }
+
     upOctave(self) {
         self.octave ++;
 
@@ -75,7 +100,7 @@ class PianoBox {
 
     static playNote(note) {
         console.log(note);
-        this.displayNote(document.querySelector('#pianoBox #freq-monitor .screen'), note);
+        this.displayNote(document.querySelector('#pianoBox #freq-displayer .displayer'), note);
     }
 
     static displayNote(elt, note) {

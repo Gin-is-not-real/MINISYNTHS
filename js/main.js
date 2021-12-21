@@ -1,6 +1,6 @@
 let root = document.querySelector('#root'); 
 
 let pianoBox = new PianoBox(NOTES);
-root.appendChild(pianoBox.createElement());
+root.appendChild(pianoBox.interface);
 
-attachKeysEvents(NOTES);
+// attachKeysEvents(NOTES);

@@ -39,6 +39,12 @@
     color: var(--bg-btn2);
 }
 /* keyboard */
+keyboard-1::part(keyboard) {
+    width: 100%;
+    min-width: 120px;
+    max-width: 160px;
+    height: 100%;
+}
 #keyboard-cnt {
     width: 100%;
     min-width: 120px;
