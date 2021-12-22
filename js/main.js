@@ -6,8 +6,8 @@
 let root = document.querySelector('#root'); 
 ////////////////////////////////////////////////////////////////
 //
-customElements.define('gain-control', GainControl);
+customElements.define('range-control', RangeControl);
 
-let gainControl = document.createElement('gain-control');
+let gainControl = document.createElement('range-control');
 root.appendChild(gainControl);
 

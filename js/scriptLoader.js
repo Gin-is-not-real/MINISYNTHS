@@ -14,7 +14,7 @@ function loadScript(src) {
 
 loadScript("js/CONSTANTES.js")
 // .then(Modular => loadScript("js/Modular/Modular.js", Modular))
-.then(Components => loadScript("js/Modular/Components/Components.js", Components))
+.then(Components => loadScript("js/Modular/Components/GainControl.js", Components))
 // .then(PianoBox => loadScript("js/PianoBox/PianoBox.js", PianoBox))
 // .then(PianoBoxComponent => loadScript("js/PianoBoxComponent/PianoBoxComponent.js", PianoBoxComponent))
 .then(main => loadScript("js/main.js", main))

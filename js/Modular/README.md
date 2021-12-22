@@ -18,7 +18,7 @@ Affichage:
 - Un css flexible
     - pouvoir changer facilement l'apparence sans casser la structure
 
-### GainControl 
+### RangeControl 
 - attach shadowDOM
 - Create element div container
 - Create HTMLstring template

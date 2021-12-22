@@ -1,4 +1,4 @@
-class GainControl extends HTMLElement {
+class RangeControl extends HTMLElement {
     constructor() {
         super();
         let shadow = this.attachShadow({mode: 'open'});
@@ -52,9 +52,7 @@ class GainControl extends HTMLElement {
                 opacity: .8;
                 transition: opacity .2s;
                 transform: rotate(-90deg);
-                // transform-origin: 30px 15px;
-                position: absolute;
-                bottom: 50px;
+                transform-origin: 26px 7px;
             }
             input::-moz-range-track {
                 height: 100%;
