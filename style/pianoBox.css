@@ -1,3 +1,6 @@
+/* @import url('vars.css');
+@import url('style.css'); */
+
 #pianoBox {
     width: 230px;
     min-width: max-content;
@@ -24,8 +27,12 @@
 #osc-cnt div {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
     max-width: 30px;
+}
+#osc-cnt div p {
+    margin: 0;
 }
 #osc-cnt .displayer {
     height: 15px !important; 
@@ -173,7 +180,7 @@ input[type=range]::-moz-range-progress {
 /* octave shifter*/
 #octave-shifter {
     min-width: 30px;
-    height: 90%;
+    height: 100%;
     align-self: center;
     display: flex;
     flex-direction: column;
@@ -182,7 +189,7 @@ input[type=range]::-moz-range-progress {
 }
 #octave-shifter button {
     width: 6px;
-    height: 6px;
+    height: 9px;
     border-radius: 100%;
     background-color: var(--bg-btn1);
     border: 1px solid var(--bor-color-btn);
@@ -203,6 +210,9 @@ input[type=range]::-moz-range-progress {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#octave-shifter p {
+    margin: 0;
 }
 
 /*  */

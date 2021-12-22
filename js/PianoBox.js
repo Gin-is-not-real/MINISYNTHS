@@ -1,9 +1,7 @@
 ////////////////////////////////////////////////////////////////
 //
-class PianoBox {
-    osc;
-    oscGain;
-    masterGain;
+class PianoBox extends HTMLElement {
+    soundNodes = {}
 
     notes = [];
     activeNote;
@@ -13,12 +11,21 @@ class PianoBox {
     interface;
 
     constructor() {
-        this.osc = this.createSoundNodes();
+        super();
+
+        let shadow = this.attachShadow({mode: 'open'});
+
+        this.soundNodes = this.createSoundNodes();
         this.notes = NOTES;
         this.octave = 4;
         this.padIsHold = false;
 
         this.interface = this.createInterface();
+        shadow.appendChild(this.interface);
+
+        this.control = this.createControl();
+        this.createKeyboardElement();
+        this.createOctaveShifter();
 
         this.attachKeysEvents();
     }
@@ -27,110 +34,100 @@ class PianoBox {
         let master = audioCtx.createGain();
         master.gain.value = 1;
         master.connect(audioCtx.destination);
-        this.masterGain = master;
 
         let gain = audioCtx.createGain();
         gain.gain.value = 0;
         gain.connect(master);
-        this.oscGain = gain;
 
         let osc = audioCtx.createOscillator();
         // osc.gain = gain;
         osc.connect(gain);
         osc.start();
 
-        return osc;
+        let sNodes = {masterGain: master, oscGain: gain, osc: osc};
+
+        return sNodes;
     }
 
     createInterface() {
-        let content = document.createElement("div");
-        content.id = "pianoBox";
+        let interf = document.createElement("div");
+        interf.id = "pianoBox";
 
-        content.appendChild(this.createOscControls());
-        content.appendChild(this.createKeyboardElement());
-        content.appendChild(this.createOctaveShifter());
+        let style = `<style>
+                @import url("style/pianoBox.css");
+            </style>
+        `;
+        interf.insertAdjacentHTML('beforeend', style);
 
-        return content;
+        return interf;
     }
 
-    createOscControls() {
-        let container = document.createElement('div');
-        container.id = "osc-cnt";
-
-        //gain
-        let gainCnt = document.createElement('div');
-        gainCnt.id = "osc-gain-cnt";
-
-        let gainDisplayer = document.createElement('p');
-        gainDisplayer.textContent = 'Vol';
-
-        let gainControl = document.createElement("input");
-        gainControl.type = "range";
-        gainControl.max = '3';
-        gainControl.step = '0.2';
-        gainControl.value = this.getMasterGain();
-
-        gainCnt.appendChild(gainDisplayer);
-        gainCnt.appendChild(gainControl);
-
-        container.appendChild(gainCnt);
+    createControl() {
+        let template = `
+            <div id="osc-cnt">
+                <div id="ocs-gain-cnt">
+                    <p>Vol</p>
+                    <input type="range" max="3" step="0.2"></input>
+                </div>
+            </div>
+        `;
+        this.interface.insertAdjacentHTML('beforeend', template);
+        
+        let input = this.shadowRoot.querySelector('#ocs-gain-cnt input');
+        input.value = this.getMasterGain();
 
         let self = this;
-        gainControl.addEventListener('input', function() {
+        input.addEventListener('input', function() {
             self.setMasterGain(this.value);
         });
 
-        return container
+        this.soundNodes.masterGain.input = input; 
     }
 
     createKeyboardElement() {
-        let keyboardCnt = document.createElement("div");
-        keyboardCnt.id = "keyboard-cnt";
-        let keyboard = document.createElement("div");
-        keyboard.id = "keyboard";
-    
-        this.notes.forEach(note => {
-            let noteElt = this.createNoteElement(note);
-            keyboard.appendChild(noteElt);
-
-            note.element = noteElt;
+        let notes = this.notes;
+        let template = `
+            <div id="keyboard-cnt">
+                <div id="keyboard">
+        `;
+        notes.forEach(note => {
+            let clName = note.name.substr(-1) === "d" ? "note diese" : "note";
+            
+            template += `<div 
+                class="` + clName + `" 
+                id="` + note.name + `">
+                    <p>` + note.key + `</p>
+            </div>
+            `;
         });
-        keyboardCnt.appendChild(keyboard);
 
-        return keyboardCnt;
-    }
+        template += `
+                </div>
+            </div>
+        `;
+        this.interface.insertAdjacentHTML('beforeend', template);
 
-    createNoteElement(note) {
-        let noteElt = document.createElement('div');
-        noteElt.className = 'note';
-        noteElt.id = note.name;
-        let p = document.createElement('p');
-        p.textContent = note.key;
-        noteElt.appendChild(p);
-    
-        if(noteElt.id.substr(-1) === "d") {
-            noteElt.classList.add('diese');
-        }
-    
         let self = this;
-        noteElt.addEventListener("mousedown", function() {
-            self.playNote(note);
-            self.padIsHold = true;
-        });
-        noteElt.addEventListener("mouseup", function() {
-            self.stopNote();
-            self.padIsHold = false;
-        });
-        noteElt.addEventListener("mouseenter", function() {
-            if(self.padIsHold) {
+        notes.forEach(note => {
+            note.pad = this.interface.querySelector('#' + note.name);
+            note.pad.addEventListener("mousedown", function() {
                 self.playNote(note);
-            }
-        });
-        noteElt.addEventListener("mouseleave", function() {
-            self.stopNote();
-        });
-    
-        return noteElt;
+                self.padIsHold = true;
+            });
+            note.pad.addEventListener("mouseup", function() {
+                self.stopNote();
+                self.padIsHold = false;
+            });
+            note.pad.addEventListener("mouseenter", function() {
+                if(self.padIsHold) {
+                    self.playNote(note);
+                }
+            });
+            note.pad.addEventListener("mouseleave", function() {
+                self.stopNote();
+            });
+        })
+        this.notes = notes;
     }
 
     attachKeysEvents() {
@@ -162,46 +159,31 @@ class PianoBox {
     }
 
     createOctaveShifter() {
-        let component = document.createElement('div');
-        component.className = "comp-cnt";
-        component.id = "octave-shifter";
-
-        let label = document.createElement('p');
-        label.textContent = 'Oct';
-
-        let screen = document.createElement('div');
-        let p = document.createElement('p');
-        p.textContent = this.octave;
-        screen.appendChild(p);
-
-        let btnUp = document.createElement('button');
-        btnUp.className = "shift-up";
-        component.up = btnUp;
-
-        let btnDown = document.createElement('button');
-        btnDown.className = "shift-down";
-        component.down = btnDown;
+        let template = `
+        <div id="octave-shifter">
+            <p>Oct</p>
+            <button id="octave-up"></button>
+            <div><p id="octave-displayer">` + this.octave + `</p></div>
+            <button id="octave-down"></button>
+        </div>
+        `;
+        this.interface.insertAdjacentHTML('beforeend', template);
 
         let self = this;
-        component.up.addEventListener('click', function() {
+        let p = this.interface.querySelector('#octave-displayer');
+
+        this.interface.querySelector('#octave-up').addEventListener('click', function() {
             if(self.octave < 9) {
                 self.upOctave(self);
                 p.textContent = self.octave;
             }
         });
-        component.down.addEventListener('click', function() {
+        this.interface.querySelector('#octave-down').addEventListener('click', function() {
             if(self.octave > 0) {
                 self.downOctave(self);
                 p.textContent = self.octave;
             }
         });
-
-        component.appendChild(label);
-        component.appendChild(btnUp);
-        component.appendChild(screen);
-        component.appendChild(btnDown);
-
-        return component;
     }
 
     playNote(note) {
@@ -226,21 +208,23 @@ class PianoBox {
     }
 
     setOscFrequency(value) {
-        this.osc.frequency.value = value;
+        this.soundNodes.osc.frequency.value = value;
     }
     getOscFrequency() {
-        return this.osc.frequency.value;
+        return this.soundNodes.osc.frequency.value;
     }
     setOscGain(value) {
-        this.oscGain.gain.value = value;
+        this.soundNodes.oscGain.gain.value = value;
     }
     getOscGain= function() {
-        return this.oscGain.gain.value;
+        return this.soundNodes.oscGain.gain.value;
     }
     setMasterGain(value) {
-        this.masterGain.gain.value = value;
+        this.soundNodes.masterGain.gain.value = value;
     }
     getMasterGain= function() {
-        return this.masterGain.gain.value;
+        return this.soundNodes.masterGain.gain.value;
     }
 }
+
+customElements.define('piano-box', PianoBox);
