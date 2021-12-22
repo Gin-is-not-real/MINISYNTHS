@@ -13,7 +13,7 @@ function loadScript(src) {
 }
 
 loadScript("js/CONSTANTES.js")
-.then(PianoBox => loadScript("js/PianoBox.js", PianoBox))
+.then(PianoBox => loadScript("js/PianoBoxComponent.js", PianoBox))
 .then(main => loadScript("js/main.js", main))
 .catch(alert);
 
