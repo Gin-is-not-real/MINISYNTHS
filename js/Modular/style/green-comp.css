@@ -1,0 +1,9 @@
+html {
+    --bg-cnt: #221d1d;
+    --bor-cnt: 1px solid grey;
+    
+    --bg-1: #2ebd1b8a;
+    --bg-2: rgb(44, 160, 33);
+    --bor-color: #2c8b00;
+    --bor: 1px solid var(--bor-color);
+}

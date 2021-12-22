@@ -2,10 +2,10 @@
     --uw-1: 30px;
     --uh-1: 40px; 
 
-    border: 1px solid var(--bor-color-btn);
-    display: flex;
+    border: var(--bor);
+    color: var(--bor-color);
 
-    color: var(--bor-color-btn);
+    display: flex;
 }
 .component.w1 {
     width: var(--uw-1);

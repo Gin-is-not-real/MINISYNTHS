@@ -101,8 +101,8 @@ class VerticalRangeControl extends HTMLElement {
  */
 class RangeControl extends HTMLElement {
     cssImportList = [
-        'js/Modular/Components/style/container.css',
-        'js/Modular/Components/style/vertical-flat-range.css'
+        'js/Modular/style/container.css',
+        'js/Modular/style/vertical-flat-range.css'
     ];
 
     constructor() {
@@ -121,14 +121,14 @@ class RangeControl extends HTMLElement {
 
         shadow.appendChild(container);
     }
-
 }
 
 class GainControl extends RangeControl {
     cssImportList = [
-        'js/Modular/Components/style/container.css',
-        'js/Modular/Components/style/vertical-flat-range.css'
+        'js/Modular/style/container.css',
+        'js/Modular/style/vertical-flat-range.css',
     ];
+
     constructor() {
         super();
     }

@@ -28,10 +28,11 @@ function insertCssImports(componentList) {
     let str = '';
     componentList.forEach(comp => {
         comp.cssImportList.forEach(url => {
-                if(!styleNodeHTML.includes(url) && !str.includes(url)) {
-                    str += `@import url(` + url + `);`;
-                }
-            })
+            if(!styleNodeHTML.includes(url) && !str.includes(url)) {
+                str += `@import url(` + url + `);`;
+            }
         })
+    });
+    console.log(str);
     shadowStyle.insertAdjacentHTML('beforeend', str);
 }

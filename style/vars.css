@@ -4,11 +4,10 @@ html {
     
     --bg-elt: #181515;
 
-    --bg-btn1: #955b108a;
-    --bg-btn2: rgb(167, 108, 46);
-    --bor-color-btn: #8b6200;
+    --bg-1: #955b108a;
+    --bg-2: rgb(167, 108, 46);
+    --bor-color: #8b6200;
 
     /* --shadow: 1px 1px 3px #8b6200; */
     --shadow: 1px 1px 4px #a67416;
-    
 }
