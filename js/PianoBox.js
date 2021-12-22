@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////
 //
-class PianoBox extends HTMLElement {
+class PianoBoxComponent extends HTMLElement {
     soundNodes = {}
 
     notes = [];
@@ -15,7 +15,6 @@ class PianoBox extends HTMLElement {
 
         let shadow = this.attachShadow({mode: 'open'});
 
-        this.soundNodes = this.createSoundNodes();
         this.notes = NOTES;
         this.octave = 4;
         this.padIsHold = false;
@@ -23,6 +22,7 @@ class PianoBox extends HTMLElement {
         this.interface = this.createInterface();
         shadow.appendChild(this.interface);
 
+        this.soundNodes = this.createSoundNodes();
         this.control = this.createControl();
         this.createKeyboardElement();
         this.createOctaveShifter();
@@ -226,5 +226,4 @@ class PianoBox extends HTMLElement {
         return this.soundNodes.masterGain.gain.value;
     }
 }
-
-customElements.define('piano-box', PianoBox);
+// customElements.define('piano-box', PianoBox);
