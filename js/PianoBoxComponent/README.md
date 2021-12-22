@@ -61,3 +61,6 @@ Un petit synthetiseur sous forme de web component
 **Inconvénients:**
     - On doit récuperer les élements par query pour y attacher les events ou les manipuler
     - Pirouete pour le style
+
+**Optimisation ?**
+Separer les sous composants ?

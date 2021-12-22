@@ -6,6 +6,8 @@
 let root = document.querySelector('#root'); 
 ////////////////////////////////////////////////////////////////
 //
-customElements.define('piano-box', PianoBoxComponent);
-root.appendChild(document.createElement('piano-box'));
+customElements.define('gain-control', GainControl);
+
+let gainControl = document.createElement('gain-control');
+root.appendChild(gainControl);
 
