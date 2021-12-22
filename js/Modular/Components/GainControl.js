@@ -1,4 +1,13 @@
-class RangeControl extends HTMLElement {
+/**
+ * Recupere le shadow DOM
+ * Creer un HTMLDivElement container
+ * Ecrit le template html dans une HTMLString
+ * Ecrit le style dans une HTMLString
+ * container insert template
+ * container insert style
+ * shadow append le container
+ */
+class VerticalRangeControl extends HTMLElement {
     constructor() {
         super();
         let shadow = this.attachShadow({mode: 'open'});
@@ -81,3 +90,48 @@ class RangeControl extends HTMLElement {
         shadow.appendChild(container);
     }
 }
+
+/**
+ * cssImportList = {Array string}
+ * 
+ * Creer un HTMLDivElement container
+ * Ecrit le template html dans une HTMLString
+ * container insert template
+ * shadow append le container
+ */
+class RangeControl extends HTMLElement {
+    cssImportList = [
+        'js/Modular/Components/style/container.css',
+        'js/Modular/Components/style/vertical-flat-range.css'
+    ];
+
+    constructor() {
+        super();
+
+        let container = document.createElement('div');
+        let template = `
+            <div class="component w1 h2 vert">
+                <div class="element vert-flat-range">
+                    <p>Vol</p>
+                    <input type="range" max="3" step="0.2"></input>
+                </div>
+            </div>
+        `;
+        container.insertAdjacentHTML('beforeend', template);
+
+        shadow.appendChild(container);
+    }
+
+}
+
+class GainControl extends RangeControl {
+    cssImportList = [
+        'js/Modular/Components/style/container.css',
+        'js/Modular/Components/style/vertical-flat-range.css'
+    ];
+    constructor() {
+        super();
+    }
+
+}
+

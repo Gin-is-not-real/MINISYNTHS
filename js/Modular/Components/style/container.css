@@ -1,0 +1,23 @@
+.component {
+    --uw-1: 30px;
+    --uh-1: 40px; 
+
+    border: 1px solid var(--bor-color-btn);
+    display: flex;
+
+    color: var(--bor-color-btn);
+}
+.component.w1 {
+    width: var(--uw-1);
+}
+.component.h2 {
+    height: calc(var(--uh-1) + var(--uh-1));
+}
+
+.element {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+}
+

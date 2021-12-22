@@ -1,0 +1,44 @@
+.vert-flat-range {
+    flex-direction: column;
+    align-items: center;
+}
+
+.vert-flat-range p {
+    width: max-content;
+    margin-top: 4px;
+    color: var(--bg-btn2);
+}
+.vert-flat-range input[type="range"] {
+    width: 45px;
+    height: 8px;
+    padding: 0;
+    
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+    box-sizing: border-box;
+
+    background-color: var(--bg-btn1);
+    opacity: .8;
+    transition: opacity .2s;
+    transform: rotate(-90deg);
+    transform-origin: 26px 7px;
+}
+.vert-flat-range input[type="range"]::-moz-range-track {
+    height: 100%;
+    background-color: var(--bg-cnt);
+    border: 1px solid var(--bor-color-btn);
+    border-radius: 0;
+}
+.vert-flat-range input[type="range"]::-moz-range-thumb {
+    width: 5px;
+    height: 100%;
+    background-color: var(--bg-btn2);
+    border: none;
+    border-radius: 0;
+}
+.vert-flat-range input[type="range"]::-moz-range-progress {
+    height: 100%;
+    background-color: var(--bg-btn1);
+    border: 1px solid var(--bor-color-btn);
+}
