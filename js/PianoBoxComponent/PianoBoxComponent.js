@@ -54,7 +54,7 @@ class PianoBoxComponent extends HTMLElement {
         interf.id = "pianoBox";
 
         let style = `<style>
-                @import url("style/pianoBox.css");
+                @import url("js/PianoBoxComponent/pianoBoxComponent.css");
             </style>
         `;
         interf.insertAdjacentHTML('beforeend', style);
