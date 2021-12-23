@@ -120,11 +120,13 @@ class RangeControl extends HTMLElement {
         // let shad = this.attachShadow({mode: 'open'});
         let container = document.createElement('div');
         if(id !== undefined) {
-            this.id += '-' + id;
+            // this.id += '-' + id;
+            this.id = id;
             container.setAttribute('id', this.id);
         }
         container.insertAdjacentHTML('beforeend', this.template);
         // shad.appendChild(container);
+        this.container = container;
 
         shadow.appendChild(container);
 
@@ -132,8 +134,9 @@ class RangeControl extends HTMLElement {
     }
 
     init() {
-        let container = root.shadowRoot.getElementById(this.id);
-        let input = container.querySelector('input');
+        // let container = root.shadowRoot.getElementById(this.id);
+        
+        let input = this.container.querySelector('input');
         let self = this;
         input.addEventListener('input', function() {
             self.send(this.value);
@@ -145,6 +148,11 @@ class RangeControl extends HTMLElement {
     }
     receive(value) {
         console.log(this, ' send ', value);
+    }
+
+    setLabel(value) {
+        let p = this.container.querySelector('p');
+        p.textContent = value;
     }
 }
 
