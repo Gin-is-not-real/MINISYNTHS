@@ -12,27 +12,28 @@ class Component extends HTMLElement {
     constructor() {
         super();
 
-        // this.id += Math.random(10);
+        this.id += Tools.uniquId(5);
 
         let container = document.createElement('div');
         container.setAttribute('id', this.id);
         container.insertAdjacentHTML('beforeend', this.template);
-
-        this.insertCssImports();
+        this.container = container;
 
         SHADOW.appendChild(container);
+        this.insertCssImports(SHADOW.nodeStyle);
+
+        console.log(this.id);
     }
 
-    insertCssImports() {
-        let styleNodeHTML = SHADOW.nodeStyle.innerHTML;
-        // console.log(styleNode);
+    insertCssImports(node) {
+        let styleNodeHTML = node.innerHTML;
         let str = '';
         this.cssImportList.forEach(url => {
             if(!styleNodeHTML.includes(url) && !str.includes(url)) {
                 str += `@import url(` + url + `);`;
             }
         })
-        SHADOW.nodeStyle.insertAdjacentHTML('beforeend', str);
+        node.insertAdjacentHTML('beforeend', str);
     }
 }
 
