@@ -1,4 +1,4 @@
-## Modular
+## Modular    *need to be updated*
 Nodes:  
 - 1 osc
 - 1 gain master

@@ -1,11 +1,17 @@
 html {
     background-color: rgb(34, 29, 29);
+    color: var(--bor-color);
 }
-
 html * {
     box-sizing: content-box;
     margin: 0;
     padding: 0;
+}
+.dev {
+    padding: 2%;
+}
+.dev {
+    padding: 2%;
 }
 #root {
     padding: 2%;

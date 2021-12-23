@@ -100,16 +100,12 @@ class VerticalRangeControl extends HTMLElement {
  * shadow append le container
  */
 class RangeControl extends HTMLElement {
+    id = 'range-control';
     cssImportList = [
         'js/Modular/style/container.css',
         'js/Modular/style/vertical-flat-range.css'
     ];
-
-    constructor() {
-        super();
-
-        let container = document.createElement('div');
-        let template = `
+    template = `
             <div class="component w1 h2 vert">
                 <div class="element vert-flat-range">
                     <p>Vol</p>
@@ -117,21 +113,44 @@ class RangeControl extends HTMLElement {
                 </div>
             </div>
         `;
-        container.insertAdjacentHTML('beforeend', template);
+
+    constructor(id) {
+        super();
+
+        // let shad = this.attachShadow({mode: 'open'});
+        let container = document.createElement('div');
+        if(id !== undefined) {
+            this.id += '-' + id;
+            container.setAttribute('id', this.id);
+        }
+        container.insertAdjacentHTML('beforeend', this.template);
+        // shad.appendChild(container);
 
         shadow.appendChild(container);
+
+        this.init();
+    }
+
+    init() {
+        let container = root.shadowRoot.getElementById(this.id);
+        let input = container.querySelector('input');
+
+        let self = this;
+        input.addEventListener('input', function() {
+            self.send(this.value);
+        })
+    }
+    send(value) {
+        console.log(this, ' send ', value);
+    }
+    receive() {
+        console.log(this, ' send ');
     }
 }
 
 class GainControl extends RangeControl {
-    cssImportList = [
-        'js/Modular/style/container.css',
-        'js/Modular/style/vertical-flat-range.css',
-    ];
-
-    constructor() {
-        super();
+    constructor(id) {
+        super(id);
     }
-
 }
 

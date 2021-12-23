@@ -1,24 +1,28 @@
 ////////////////////////////////////////////////////////////////
 //
 let root = document.querySelector('#root'); 
+let dev = document.createElement('div');
+dev.className = 'dev';
+document.querySelector('header').appendChild(dev);
 
+//pour gerer le style des custom element
 let shadow = root.attachShadow({mode: 'open'});
 let shadowStyle = document.createElement('style');
 shadowStyle.id = 'shadow-css-imports';
 shadow.appendChild(shadowStyle);
 ////////////////////////////////////////////////////////////////
 //
-// customElements.define('range-control', RangeControl);
-// let rangeControl = document.createElement('range-control');
-// root.appendChild(rangeControl);
-
 customElements.define('gain-control', GainControl);
-let gainControl = document.createElement('gain-control');
+let gainControl = new GainControl(0);
+gainControl.send = function(value) {
+    dev.textContent = this.id + ' send ' + value;
+    ;
+}
+
 root.appendChild(gainControl);
 
-let styles = shadow.querySelectorAll('style');
-
 insertCssImports([gainControl]);
+
 
 ////////////////////////////////////////////////////////////////
 //
@@ -33,6 +37,5 @@ function insertCssImports(componentList) {
             }
         })
     });
-    console.log(str);
     shadowStyle.insertAdjacentHTML('beforeend', str);
 }
