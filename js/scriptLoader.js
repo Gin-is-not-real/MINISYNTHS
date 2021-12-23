@@ -13,9 +13,10 @@ function loadScript(src) {
 }
 
 loadScript("js/CONSTANTES.js")
+.then(Tools => loadScript("js/Modular/Tools.js", Tools))
 // .then(Modular => loadScript("js/Modular/Modular.js", Modular))
 .then(Components => loadScript("js/Modular/Components/Component.js", Components))
-.then(GainControl => loadScript("js/Modular/Components/GainControl.js", GainControl))
+.then(RangeControl => loadScript("js/Modular/Components/RangeControl.js", RangeControl))
 // .then(PianoBox => loadScript("js/PianoBox/PianoBox.js", PianoBox))
 // .then(PianoBoxComponent => loadScript("js/PianoBoxComponent/PianoBoxComponent.js", PianoBoxComponent))
 .then(main => loadScript("js/main.js", main))
