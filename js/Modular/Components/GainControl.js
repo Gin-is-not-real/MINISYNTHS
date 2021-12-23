@@ -114,6 +114,9 @@ class RangeControl extends HTMLElement {
             </div>
         `;
 
+    label;
+    input;
+
     constructor(id) {
         super();
 
@@ -134,8 +137,6 @@ class RangeControl extends HTMLElement {
     }
 
     init() {
-        // let container = root.shadowRoot.getElementById(this.id);
-        
         let input = this.container.querySelector('input');
         let self = this;
         input.addEventListener('input', function() {
@@ -147,7 +148,7 @@ class RangeControl extends HTMLElement {
         console.log(this, ' send ', value);
     }
     receive(value) {
-        console.log(this, ' send ', value);
+        console.log(this, ' receive ', value);
     }
 
     setLabel(value) {
@@ -155,6 +156,7 @@ class RangeControl extends HTMLElement {
         p.textContent = value;
     }
 }
+
 
 class GainControl extends RangeControl {
     constructor(id) {

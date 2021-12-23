@@ -12,7 +12,9 @@ shadowStyle.id = 'shadow-css-imports';
 shadow.appendChild(shadowStyle);
 ////////////////////////////////////////////////////////////////
 //
+customElements.define('range-control', RangeControl);
 customElements.define('gain-control', GainControl);
+
 let gainControl = new GainControl('gain-control');
 gainControl.send = function(value) {
     dev.textContent = this.id + ' send ' + value;
@@ -26,13 +28,17 @@ freqControl.send = function(value) {
 }
 freqControl.setLabel('Hz')
 
+let control = new RangeControl();
+control.send = function(value) {
+    dev.textContent = this.id + ' send ' + value;
+    ;
+}
 
-root.appendChild(gainControl);
+
+// root.appendChild(gainControl);
 // root.appendChild(freqControl);
 
-
-
-insertCssImports([gainControl]);
+insertCssImports([gainControl, freqControl]);
 ////////////////////////////////////////////////////////////////
 //
 function insertCssImports(componentList) {
