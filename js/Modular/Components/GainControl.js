@@ -134,17 +134,17 @@ class RangeControl extends HTMLElement {
     init() {
         let container = root.shadowRoot.getElementById(this.id);
         let input = container.querySelector('input');
-
         let self = this;
         input.addEventListener('input', function() {
             self.send(this.value);
         })
     }
+
     send(value) {
         console.log(this, ' send ', value);
     }
-    receive() {
-        console.log(this, ' send ');
+    receive(value) {
+        console.log(this, ' send ', value);
     }
 }
 

@@ -19,11 +19,18 @@ gainControl.send = function(value) {
     ;
 }
 
+// let freqControl = new RangeControl(0);
+// freqControl.send = function(value) {
+//     dev.textContent = this.id + ' send ' + value;
+//     ;
+// }
+
 root.appendChild(gainControl);
+// root.appendChild(freqControl);
+
+
 
 insertCssImports([gainControl]);
-
-
 ////////////////////////////////////////////////////////////////
 //
 function insertCssImports(componentList) {
