@@ -1,7 +1,7 @@
 #pianoBox {
-    width: 230px;
+    width: 300px;
     min-width: max-content;
-    height: 60px;
+    height: 90px;
 
     display: flex;
     justify-content: space-between;
@@ -12,8 +12,7 @@
     border-radius: 2px;
     box-shadow: var(--shadow);
 
-    font-size: 10px;
-    color: var(--bg2);
+    color: var(--bg-2);
 }
 /* osc */
 #osc-cnt {
@@ -34,11 +33,12 @@
 #osc-cnt .displayer {
     height: 15px !important; 
 }
+
 input[type="range"] {
     box-sizing: border-box;
     padding: 0;
-    width: 40px;
-    height: 8px;
+    width: 60px;
+    height: 10px;
     -webkit-appearance: none;
     cursor: pointer;
     outline: none;
@@ -48,7 +48,7 @@ input[type="range"] {
     transition: opacity .2s;
 
     transform: rotate(-90deg);
-    transform-origin: 30px 15px;
+    transform-origin: 45px 19px;
 }
 input[type=range]::-moz-range-track {
     height: 100%;
@@ -76,8 +76,6 @@ input[type=range]::-moz-range-progress {
 /* keyboard */
 #keyboard-cnt {
     width: 100%;
-    min-width: 120px;
-    max-width: 160px;
     height: 100%;
 }
 #keyboard {
@@ -97,8 +95,8 @@ input[type=range]::-moz-range-progress {
 
     background-color: var(--bg-1);
     border: var(--bor);
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 9px;
+    border-bottom-right-radius: 9px;
 
     color: rgba(0, 0, 0, 0.671);
     text-align: center;
@@ -187,25 +185,25 @@ input[type=range]::-moz-range-progress {
 }
 #octave-shifter button {
     width: 6px;
-    height: 9px;
+    height: 10px;
     cursor: pointer;
 
     border-radius: 100%;
     background-color: var(--bg-1);
-    border: var(--bor-color);
+    border: var(--bor);
 }
 #octave-shifter button:hover {
     box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
 }
 #octave-shifter div {
-    width: 15px;
-    height: 15px;
+    width: 25px;
+    height: 25px;
     display: flex;
     justify-content: center;
     align-items: center;
 
     background-color: var(--bg-elt);
-    border: var(--bg-1);
+    border: var(--bor);
     border-radius: 10%;
     color: var(--bg-2);
 }
