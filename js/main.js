@@ -18,8 +18,8 @@ customElements.define('base-controller', Controller);
 
 // let component = document.createElement('base-component');
 let controller = document.createElement('base-controller');
-
-
-
+controller.send = function(value) {
+    dev.textContent = this.id + ' send ' + value;
+}
 ////////////////////////////////////////////////////////////////
 //

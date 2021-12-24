@@ -9,20 +9,18 @@ class Tools {
     }
 
     static removeSpaceBeetwenTags(string) {
-        let splitted1 = string.split("  ");
-        console.log(splitted1);
+        //enlever les " " avant le premier "<" et apres le dernier ">" 
+        string = string.trim();
+        //enlever les saut de lignes 
+        string = string.replaceAll('\n', '!');
+        string = string.replaceAll(/(\s{2,})/g, '!');
+        let split = string.split('!!');
+        console.log(split);
 
         let formated = "";
-        splitted1.forEach(entry => {
-            if(entry !== "") {
-                let splitted2 = entry.split("\n");
-                splitted2.forEach(s => {
-                    if(s !== "") {
-                        formated += s + " ";
-                    }
-                })
-                
-            }
+        split.forEach(i => {
+            // console.log(i);
+            formated += i;
         });
         console.log(formated);
 

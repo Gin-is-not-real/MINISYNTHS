@@ -19,15 +19,10 @@ class Component extends HTMLElement {
         this.container = container;
 
         SHADOW.appendChild(container);
-
-        // this.container.insertAdjacentHTML('beforeend', this.template);
-        // this.insertCssImports(SHADOW.nodeStyle);
-        // this.init();
-        // console.log(this.id);
-        // console.log(this.container.childNodes);
+        console.log(container.childNodes);
     }
 
-    init() {
+    initTemplate() {
         let templ = Tools.removeSpaceBeetwenTags(this.template);
         this.container.insertAdjacentHTML('beforeend', templ);
         this.insertCssImports(SHADOW.nodeStyle);

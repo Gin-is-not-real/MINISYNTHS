@@ -19,7 +19,16 @@ class Controller extends Component {
     constructor() {
         super();
 
-        this.init();
+        this.initTemplate();
+        this.initcontrols();
+    }
+
+    initcontrols() {
+        let input = this.container.querySelector('input');
+        let self = this;
+        input.addEventListener('input', function() {
+            self.send(this.value);
+        })
     }
 
     send(value) {
