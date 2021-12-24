@@ -16,8 +16,7 @@ customElements.define('base-component', Component);
 customElements.define('base-controller', Controller);
 
 
-
-let component = document.createElement('base-component');
+// let component = document.createElement('base-component');
 let controller = document.createElement('base-controller');
 
 

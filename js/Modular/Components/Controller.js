@@ -11,7 +11,7 @@ class Controller extends Component {
                 <input type="range" max="3" step="0.2"></input>
             </div>
         </div>
-        `;
+    `;
 
     label;
     input;

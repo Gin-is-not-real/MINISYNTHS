@@ -22,9 +22,9 @@ class Component extends HTMLElement {
 
         // this.container.insertAdjacentHTML('beforeend', this.template);
         // this.insertCssImports(SHADOW.nodeStyle);
-        this.init();
-        console.log(this.id);
-        console.log(this.container.childNodes);
+        // this.init();
+        // console.log(this.id);
+        // console.log(this.container.childNodes);
     }
 
     init() {
