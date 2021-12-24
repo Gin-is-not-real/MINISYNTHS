@@ -14,13 +14,13 @@ function loadScript(src) {
 
 loadScript("js/CONSTANTES.js")
 .then(Tools => loadScript("js/Modular/Tools.js", Tools))
-.then(Components => loadScript("js/Modular/Components/Component.js", Components))
-.then(Controller => loadScript("js/Modular/Components/Controller.js", Controller))
-.then(RangeControl => loadScript("js/Modular/Components/RangeControl.js", RangeControl))
+// .then(Components => loadScript("js/Modular/Components/Component.js", Components))
+// .then(Controller => loadScript("js/Modular/Components/Controller.js", Controller))
+// .then(RangeControl => loadScript("js/Modular/Components/RangeControl.js", RangeControl))
 // .then(PianoBox => loadScript("js/PianoBox/PianoBox.js", PianoBox))
-// .then(PianoBoxComponent => loadScript("js/PianoBoxComponent/PianoBoxComponent.js", PianoBoxComponent))
-// .then(main => loadScript("js/main.js", main))
-.then(mainModular => loadScript("js/Modular/main.js", mainModular))
+.then(PianoBoxComponent => loadScript("js/PianoBoxComponent/PianoBoxComponent.js", PianoBoxComponent))
+.then(main => loadScript("js/main.js", main))
+// .then(mainModular => loadScript("js/Modular/main.js", mainModular))
 .catch(alert);
 
 
