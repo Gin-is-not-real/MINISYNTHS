@@ -1,13 +1,13 @@
 class Component extends HTMLElement {
-    id = 'comp-';
+    id = 'cmp-';
 
     cssImportList = [
         'js/Modular/style/container.css',
     ];
     template = `
-            <div class="component w1 h2 vert">
-            </div>
-        `;
+        <div class="component w1 h2 vert">
+        </div>
+    `;
 
     constructor() {
         super();
@@ -16,13 +16,21 @@ class Component extends HTMLElement {
 
         let container = document.createElement('div');
         container.setAttribute('id', this.id);
-        container.insertAdjacentHTML('beforeend', this.template);
         this.container = container;
 
         SHADOW.appendChild(container);
-        this.insertCssImports(SHADOW.nodeStyle);
 
+        // this.container.insertAdjacentHTML('beforeend', this.template);
+        // this.insertCssImports(SHADOW.nodeStyle);
+        this.init();
         console.log(this.id);
+        console.log(this.container.childNodes);
+    }
+
+    init() {
+        let templ = Tools.removeSpaceBeetwenTags(this.template);
+        this.container.insertAdjacentHTML('beforeend', templ);
+        this.insertCssImports(SHADOW.nodeStyle);
     }
 
     insertCssImports(node) {

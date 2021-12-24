@@ -1,32 +1,25 @@
 class Controller extends Component {
-    id = 'contr-';
+    id;
     cssImportList = [
         'js/Modular/style/container.css',
         'js/Modular/style/vertical-flat-range.css'
     ];
     template = `
-            <div class="component w1 h2 vert">
-                <div class="element vert-flat-range">
-                    <p>Vol</p>
-                    <input type="range" max="3" step="0.2"></input>
-                </div>
+        <div class="component w1 h2 vert">
+            <div class="element vert-flat-range">
+                <p>Vol</p>
+                <input type="range" max="3" step="0.2"></input>
             </div>
+        </div>
         `;
 
+    label;
     input;
 
     constructor() {
         super();
 
         this.init();
-    }
-
-    init() {
-        let input = this.container.querySelector('input');
-        let self = this;
-        input.addEventListener('input', function() {
-            self.send(this.value);
-        })
     }
 
     send(value) {

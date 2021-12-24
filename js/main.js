@@ -13,7 +13,13 @@ SHADOW.appendChild(SHADOW.nodeStyle);
 ////////////////////////////////////////////////////////////////
 //
 customElements.define('base-component', Component);
-let component = document.createElement('base-component')
+customElements.define('base-controller', Controller);
+
+
+
+let component = document.createElement('base-component');
+let controller = document.createElement('base-controller');
+
 
 
 ////////////////////////////////////////////////////////////////

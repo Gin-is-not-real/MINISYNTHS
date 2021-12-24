@@ -1,24 +1,14 @@
 ## Modular    *need to be updated*
-Nodes:  
-- 1 osc
-- 1 gain master
+Essai de hierachie de web components
 
-Controles:
-- gain osc
-- frequence osc
-- master
+24 dec: 
+    La création de HTML par string est claire, mais ajoute des noeuds textuels dans le DOM...
 
-Affichage:
-- affichage de la frequence
+### Classes
 
-### Direction
-- Des modules connectables
-    - Entrées Sorties ?
+#### VerticalRangeControl 
+*Web Component auto suffisant*
 
-- Un css flexible
-    - pouvoir changer facilement l'apparence sans casser la structure
-
-### VerticalRangeControl 
 **constructor()**
 - attach shadowDOM
 - Create element div container
@@ -34,7 +24,7 @@ Affichage:
 (-) HTMLString du style trés longue
 (-) Edition du style compliquée
 
-### RangeControl 
+#### RangeControl 
 *Le style n'est plus écrit dans le constructor, les components stockent une liste d'url de fichier à importer*
 
 cssImportList {Array string}
