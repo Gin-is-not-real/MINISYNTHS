@@ -1,4 +1,4 @@
-let root = document.querySelector('#root'); 
+let ROOT = document.querySelector('#root'); 
 ////////////////////////////////////////////////////////////////
 //
 customElements.define('piano-box', PianoBoxComponent);

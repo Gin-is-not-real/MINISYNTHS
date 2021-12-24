@@ -2,17 +2,17 @@
     width: 230px;
     min-width: max-content;
     height: 60px;
+
     display: flex;
     justify-content: space-between;
     gap: 4%;
     padding: 3% 1.5% 3% 1%;
 
-    /* border: var(--bor-cnt); */
-    box-shadow: var(--shadow);
     background-color: var(--bg-cnt);
     border-radius: 2px;
-    font-size: 10px;
+    box-shadow: var(--shadow);
 
+    font-size: 10px;
     color: var(--bg2);
 }
 /* osc */
@@ -22,11 +22,11 @@
     justify-content: center;
 }
 #osc-cnt div {
+    max-width: 30px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    max-width: 30px;
 }
 #osc-cnt div p {
     margin: 0;
@@ -35,40 +35,40 @@
     height: 15px !important; 
 }
 input[type="range"] {
-    -webkit-appearance: none;
-    padding: 0;
-    outline: none;
-    opacity: .8;
-    background-color: var(--bg-1);
     box-sizing: border-box;
-    transition: opacity .2s;
-    cursor: pointer;
+    padding: 0;
     width: 40px;
     height: 8px;
+    -webkit-appearance: none;
+    cursor: pointer;
+    outline: none;
+
+    opacity: .8;
+    background-color: var(--bg-1);
+    transition: opacity .2s;
+
     transform: rotate(-90deg);
     transform-origin: 30px 15px;
 }
 input[type=range]::-moz-range-track {
     height: 100%;
+    background-color: var(--bg-cnt);
     border: 1px solid var(--bor-color);
     border-radius: 0;
-    background-color: var(--bg-cnt);
 }
 input[type=range]::-moz-range-thumb {
     width: 5px;
     height: 100%;
+    background-color: var(--bg-2);
     border: none;
     border-radius: 0;
-    background-color: var(--bg-2);
 }
 input[type=range]::-moz-range-progress {
     height: 8px;
-    border: 1px solid var(--bor-color);
     background-color: var(--bg-1);
+    border: 1px solid var(--bor-color);
 }
-#osc-gain-cnt {
-    /* border: 1px solid var(--bor-color); */
-}
+
 #osc-gain-cnt input {
     width: 40px;
 }
@@ -89,18 +89,17 @@ input[type=range]::-moz-range-progress {
     grid-gap: 1px;
 }
 .note {
-    background-color: var(--bg-1);
-    border: var(--bor);
-    /* border-top: none; */
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
+    grid-row: 1/3;   
     display: flex;
     justify-content: center;
     align-items: flex-end;
-
     cursor: pointer;
 
-    grid-row: 1/3;   
+    background-color: var(--bg-1);
+    border: var(--bor);
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+
     color: rgba(0, 0, 0, 0.671);
     text-align: center;
 }
@@ -111,10 +110,11 @@ input[type=range]::-moz-range-progress {
     box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
 }
 .diese {
-    background-color: var(--bg-2);
-    border: var(--bor);
     grid-row: 1;
     z-index: 1;
+
+    background-color: var(--bg-2);
+    border: var(--bor);
 }
 .note p {
     margin-bottom: 2px;
@@ -168,6 +168,7 @@ input[type=range]::-moz-range-progress {
     display: flex;
     justify-content: center;
     align-items: center;
+
     background-color: var(--bg-elt);
     border: var(--bg-1);
     border-radius: 10%;
@@ -187,10 +188,11 @@ input[type=range]::-moz-range-progress {
 #octave-shifter button {
     width: 6px;
     height: 9px;
+    cursor: pointer;
+
     border-radius: 100%;
     background-color: var(--bg-1);
     border: var(--bor-color);
-    cursor: pointer;
 }
 #octave-shifter button:hover {
     box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
@@ -198,15 +200,14 @@ input[type=range]::-moz-range-progress {
 #octave-shifter div {
     width: 15px;
     height: 15px;
-    background-color: var(--bg-elt);
-    border: var(--bg-1);
-    border-radius: 10%;
-
-    color: var(--bg-2);
-
     display: flex;
     justify-content: center;
     align-items: center;
+
+    background-color: var(--bg-elt);
+    border: var(--bg-1);
+    border-radius: 10%;
+    color: var(--bg-2);
 }
 #octave-shifter p {
     margin: 0;
@@ -216,7 +217,6 @@ input[type=range]::-moz-range-progress {
 #freq-displayer {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
 }
 #freq-displayer > div {
     padding: 2px;
@@ -232,6 +232,7 @@ input[type=range]::-moz-range-progress {
     display: flex;
     justify-content: center;
     align-items: center;
+
     background-color: var(--bg-elt);
     border: var(--bg-1);
     border-radius: 10%;
