@@ -26,7 +26,7 @@ class RangeControl extends HTMLElement {
 
     constructor(id) {
         super();
-
+        // TODO: gerer l'imbrication de shadow dom
         // let shad = this.attachShadow({mode: 'open'});
         let container = document.createElement('div');
         if(id !== undefined) {
