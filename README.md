@@ -12,9 +12,9 @@ Interface:
 ### Versions
 **PianoBox.js**  
 *Un object qui créer son interface DOM tout en JS*  
-    *   +: un seul fichier*  
-    *   -: elements non réutilisables*  
-    *   -: longues méthodes*  
+       +: un seul fichier  
+       -: elements non réutilisables  
+       -: longues méthodes  
 
 **PianoBoxComponent.js**
 *Le même synthé mais l'objet est un web component. Le style et les elements sont crées sous forme de DOMString et inserés via `insertAdjacentHTML()`*  
