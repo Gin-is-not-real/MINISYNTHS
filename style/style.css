@@ -1,5 +1,5 @@
 html {
-    background-color: rgb(34, 29, 29);
+    background-color: var(--bg-cnt);
     color: var(--bor-color);
 }
 html * {
@@ -7,17 +7,35 @@ html * {
     margin: 0;
     padding: 0;
 }
+
 .dev {
     padding: 2%;
-}
-.dev {
-    padding: 2%;
-}
-#root {
-    padding: 2%;
-}
-body > header {
-    height: 60px;
-    background-color: rgb(27, 21, 21);
 }
 
+
+body > header {
+    height: max-content;
+    background-color: #1b1515;
+}
+body > header button {
+    margin: 2%;
+    background-color: transparent;
+    border: none;
+    /* border-bottom: var(--bor); */
+    color: var(--bor-color);
+}
+body > header button:hover {
+    border-bottom: var(--bor);
+}
+.activ-button {
+    border-bottom: var(--bor);
+}
+
+#root {
+    padding: 40px;
+}
+#root > header {
+    padding: 2% 0;
+    margin-bottom: 2%;
+    width: 300px;
+}

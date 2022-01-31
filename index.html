@@ -5,19 +5,32 @@
     <title>Mini Synth</title>
     <link rel="stylesheet" href="style/vars.css">
     <link rel="stylesheet" href="style/style.css">
-    <!-- <link rel="stylesheet" href="js/Modular/style/green-comp.css"> -->
-    <link rel="stylesheet" href="style/PianoBoxComponent/pianoBoxcomponent.css">
+
+    <link rel="stylesheet" href="js/PianoBox/pianoBox.css">
+    <!-- <link rel="stylesheet" href="js/PianoBoxComponent/PianoBoxComponent.css"> -->
 </head>
     
 <body>
     <header>
-        <!-- <h1>Mini Synth</h1> -->
+        <h1>Mini Synths</h1>
+        <nav>
+            <ul>
+                <li><button id="load-piano-box">Piano Box</button></li>
+                <li><button id="load-piano-box-component">Piano Box Web Component</button></li>
+            </ul>
+        </nav>
+
     </header>
 
     <div id="root">
     </div>
 
-    <script src="js/scriptLoader.js"></script> 
+    <script src="js/CONSTANTES.js"></script> 
+
+    <script src="js/PianoBox/PianoBox.js"></script> 
+    <script src="js/PianoBoxComponent/PianoBoxComponent.js"></script> 
+
+    <script src="js/main.js"></script> 
 </body>
 
 </html>
