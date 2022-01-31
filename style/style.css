@@ -13,12 +13,24 @@ html * {
 }
 
 
+/* HEADER */
 body > header {
     height: max-content;
+    padding: 2%;
     background-color: #1b1515;
 }
+
+body > header nav {
+    margin-top: 4%;
+}
+body > header ul {
+    list-style: none;
+    display: flex;
+    gap: 2em;
+}
+
 body > header button {
-    margin: 2%;
+    /* margin: 2%; */
     background-color: transparent;
     border: none;
     /* border-bottom: var(--bor); */
@@ -31,6 +43,8 @@ body > header button:hover {
     border-bottom: var(--bor);
 }
 
+
+/* ROOT */
 #root {
     padding: 40px;
 }
