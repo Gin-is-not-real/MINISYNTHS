@@ -58,8 +58,8 @@ class PianoBox {
         container.id = "osc-cnt";
 
         //gain
-        let gainCnt = document.createElement('div');
-        gainCnt.id = "osc-gain-cnt";
+        let gainContainer = document.createElement('div');
+        gainContainer.id = "osc-gain-cnt";
 
         let gainDisplayer = document.createElement('p');
         gainDisplayer.textContent = 'Vol';
@@ -70,10 +70,10 @@ class PianoBox {
         gainControl.step = '0.2';
         gainControl.value = this.getMasterGain();
 
-        gainCnt.appendChild(gainDisplayer);
-        gainCnt.appendChild(gainControl);
+        gainContainer.appendChild(gainDisplayer);
+        gainContainer.appendChild(gainControl);
 
-        container.appendChild(gainCnt);
+        container.appendChild(gainContainer);
 
         let self = this;
         gainControl.addEventListener('input', function() {
@@ -204,6 +204,7 @@ class PianoBox {
         return component;
     }
 
+    // synth functions
     playNote(note) {
         this.setOscFrequency(note.freq);
         this.setOscGain(1);
@@ -225,6 +226,7 @@ class PianoBox {
         });
     }
 
+    // GETTERS/SETTERS
     setOscFrequency(value) {
         this.osc.frequency.value = value;
     }

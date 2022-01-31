@@ -1,5 +1,5 @@
 ////////////////////////////////////////////////////////////////
-//
+// VARS
 let ROOT = document.querySelector('#root'); 
 
 customElements.define('piano-box', PianoBoxComponent);
@@ -9,6 +9,8 @@ let loadPianoBoxComponent = document.querySelector('#load-piano-box-component');
 
 let loadButtons = [loadPianoBox, loadPianoBoxComponent];
 
+////////////////////////////////////////////////////////////////
+// SCRIPT
 
 ////////////////////////////////////////////////////////////////
 // FUNCTIONS
@@ -29,6 +31,7 @@ loadPianoBox.addEventListener('click', function() {
     let synth = new PianoBox();
     ROOT.appendChild(synth.interface);
 })
+loadPianoBox.click();
 
 loadPianoBoxComponent.addEventListener('click', function() {
     desactiveNavButtons();
