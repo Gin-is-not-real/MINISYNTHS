@@ -1,3 +1,11 @@
+html {
+    --pb-bg-cnt: var(--bg-cnt);
+    --pb-bg-1:  var(--bg-1);
+    --pb-bg-2: var(--bg-2);
+    --pb-bor-color: #8b6200;
+    --pb-bor: 1px solid var(--pb-bor-color);
+    --pb-shadow: var(--shadow);
+}
 #pianoBox {
     width: 300px;
     min-width: max-content;
@@ -8,11 +16,11 @@
     gap: 4%;
     padding: 3% 1.5% 3% 1%;
 
-    background-color: var(--bg-cnt);
+    background-color: var(--pb-bg-cnt);
     border-radius: 2px;
-    box-shadow: var(--shadow);
+    box-shadow: var(--pb-shadow);
 
-    color: var(--bg-2);
+    color: var(--pb-bg-2);
 }
 /* osc */
 #osc-cnt {
@@ -42,9 +50,10 @@ input[type="range"] {
     -webkit-appearance: none;
     cursor: pointer;
     outline: none;
+    border: 1px solid var(--pb-bor-color);
 
     opacity: .8;
-    background-color: var(--bg-1);
+    background-color: var(--pb-bg-1);
     transition: opacity .2s;
 
     transform: rotate(-90deg);
@@ -52,21 +61,21 @@ input[type="range"] {
 }
 input[type=range]::-moz-range-track {
     height: 100%;
-    background-color: var(--bg-cnt);
-    border: 1px solid var(--bor-color);
+    background-color: var(--pb-bg-cnt);
+    border: 1px solid var(--pb-bor-color);
     border-radius: 0;
 }
 input[type=range]::-moz-range-thumb {
     width: 5px;
     height: 100%;
-    background-color: var(--bg-2);
+    background-color: var(--pb-bg-2);
     border: none;
     border-radius: 0;
 }
 input[type=range]::-moz-range-progress {
     height: 8px;
-    background-color: var(--bg-1);
-    border: 1px solid var(--bor-color);
+    background-color: var(--pb-bg-1);
+    border: 1px solid var(--pb-bor-color);
 }
 
 #osc-gain-cnt input {
@@ -93,8 +102,8 @@ input[type=range]::-moz-range-progress {
     align-items: flex-end;
     cursor: pointer;
 
-    background-color: var(--bg-1);
-    border: var(--bor);
+    background-color: var(--pb-bg-1);
+    border: var(--pb-bor);
     border-bottom-left-radius: 9px;
     border-bottom-right-radius: 9px;
 
@@ -111,8 +120,8 @@ input[type=range]::-moz-range-progress {
     grid-row: 1;
     z-index: 1;
 
-    background-color: var(--bg-2);
-    border: var(--bor);
+    background-color: var(--pb-bg-2);
+    border: var(--pb-bor);
 }
 .note p {
     margin-bottom: 2px;
@@ -167,10 +176,10 @@ input[type=range]::-moz-range-progress {
     justify-content: center;
     align-items: center;
 
-    background-color: var(--bg-elt);
-    border: var(--bg-1);
+    background-color: var(--pb-bg-elt);
+    border: var(--pb-bg-1);
     border-radius: 10%;
-    color: var(--bg-2);
+    color: var(--pb-bg-2);
 }
 
 /* octave shifter*/
@@ -189,8 +198,8 @@ input[type=range]::-moz-range-progress {
     cursor: pointer;
 
     border-radius: 100%;
-    background-color: var(--bg-1);
-    border: var(--bor);
+    background-color: var(--pb-bg-1);
+    border: var(--pb-bor);
 }
 #octave-shifter button:hover {
     box-shadow: 1px 1px 1px 1px rgba(167, 108, 46, 0.521);
@@ -202,10 +211,10 @@ input[type=range]::-moz-range-progress {
     justify-content: center;
     align-items: center;
 
-    background-color: var(--bg-elt);
-    border: var(--bor);
+    background-color: var(--pb-bg-elt);
+    border: var(--pb-bor);
     border-radius: 10%;
-    color: var(--bg-2);
+    color: var(--pb-bg-2);
 }
 #octave-shifter p {
     margin: 0;
@@ -222,7 +231,7 @@ input[type=range]::-moz-range-progress {
     justify-content: center;
     align-items: center;
 
-    color: var(--bg-2);
+    color: var(--pb-bg-2);
 }
 #freq-displayer .displayer {
     width: 15px;
@@ -231,8 +240,8 @@ input[type=range]::-moz-range-progress {
     justify-content: center;
     align-items: center;
 
-    background-color: var(--bg-elt);
-    border: var(--bg-1);
+    background-color: var(--pb-bg-elt);
+    border: var(--pb-bg-1);
     border-radius: 10%;
-    color: var(--bg-2);
+    color: var(--pb-bg-2);
 }

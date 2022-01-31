@@ -1,16 +1,4 @@
 html {
-    /* --bg-cnt: #221d1d;
-    --bor-cnt: 1px solid grey;
-    
-    --bg-elt: #181515;
-
-    --bg-1: #955b108a;
-    --bg-2: rgb(167, 108, 46);
-    --bor-color: #8b6200;
-    --bor: 1px solid var(--bor-color);
-
-    --shadow: 1px 1px 4px #a67416; */
-
     --pb-bg-cnt: var(--bg-cnt);
     --pb-bg-1:  var(--bg-1);
     --pb-bg-2: var(--bg-2);
