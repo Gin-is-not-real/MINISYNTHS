@@ -6,8 +6,9 @@ html {
 
     --bg-1: #955b108a;
     --bg-2: rgb(167, 108, 46);
-    --bor-color: #8b6200;
-    --bor: 1px solid var(--bor-color);
+    --active-color: #ce9103;
+    --inactive-color: #8a6101;
+    --bor: 1px solid var(--active-color);
 
     --shadow: 1px 1px 4px #a67416;
 }
